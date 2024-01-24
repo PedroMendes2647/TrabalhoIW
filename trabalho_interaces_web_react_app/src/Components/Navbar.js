@@ -1,17 +1,15 @@
-import React, {useState} from 'react'
+import React from 'react';
+import Logo from '../Content/OIG2.png'; 
 
 function Navbar() {
   return (
-    <>
-        <nav className="navbar">
-            <div className="navbar-container">
-              <Link to="/" className="navbar-logo">
-
-              </Link>    
-            </div>
-        </nav>
-    </>
-  )
+    <div className='navbar'>
+        <div className='leftSide'>
+            <img src={Logo} alt=""/>
+        </div>
+        <div className='rightSide'></div>
+    </div>
+  );
 }
 
-export default Navbar
+export default Navbar;
