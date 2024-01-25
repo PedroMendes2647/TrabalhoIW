@@ -20,8 +20,8 @@ function Home() {
         <source src={HomeVideo} type="video/mp4" />
       </video>
       <div className='headerContainer'>
-        <h1> WorldTravelers </h1>
-        <p> See Other People Experiences!</p>
+        <h1> World Travelers </h1>
+        <p> See Other People's Experiences!</p>
         <Link to="/shared_trips">
           <button id='HomeButton'> Discover </button>
         </Link>

@@ -3,6 +3,7 @@ import Navbar from "./Components/Navbar";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./Pages/Home";
 import Shared_Trips from "./Pages/Shared_Trips";
+import Footer from "./Components/Footer";
 
 // Navbar fica acima pois vai aparecer sempre
 // muda a página dependendo da rota onde queremos ir
@@ -16,11 +17,12 @@ function App() {
   return (
     <div className="App">
       <Router>  
-        <Navbar />
+        <Navbar/>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/" exact component={Shared_Trips} />
-        </Switch>  
+        </Switch>
+        <Footer/>  
       </Router>  
     </div>
   );
