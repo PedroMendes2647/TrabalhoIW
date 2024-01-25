@@ -1,0 +1,18 @@
+.headerContainer {
+   margin:auto;
+   text-align:center;
+   font-size: 50px;
+   color: rgb(255, 255, 255);
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 50vh;
+  }
+
+HomeButton {
+    margin:auto;
+    text-align:center;
+    font-size: 10px;
+    font-style: black;  
+}

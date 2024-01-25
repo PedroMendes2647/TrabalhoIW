@@ -1,13 +1,38 @@
-import React from 'react';
-import Logo from '../Content/OIG2.png'; 
+import React, {useState} from 'react';
+import Logo from '../Content/LogoImage.png'; 
+import {Link} from "react-router-dom";
+import "../CSS_Styles/Navbar.css";
+import ReorderIcon from "@mui/icons-material/Reorder"
 
 function Navbar() {
+
+  const [openLinks, setOpenLinks] = useState(false);
+  const NavbarToggle = () => {
+    setOpenLinks(!openLinks);
+  }
+
   return (
     <div className='navbar'>
-        <div className='leftSide'>
-            <img src={Logo} alt=""/>
+      <div className='leftSide' id={openLinks ? "open":"close"}>
+        <img src={Logo} alt=""/>
+          <div className='hiddenLinks'>
+            <Link to="/"> Home </Link>
+            <Link to="/shared_trips"> Shared Trips </Link>
+            <Link to="/share_your_trip"> Share Your Trip </Link>
+            <Link to="/about"> About us </Link>
+            <Link to="/dashboard"> Admin Dashboard </Link>
+          </div>
         </div>
-        <div className='rightSide'></div>
+        <div className='rightSide'>
+          <Link to="/"> Home </Link>
+          <Link to="/shared_trips"> Shared Trips </Link>
+          <Link to="/share_your_trip"> Share Your Trip </Link>
+          <Link to="/about"> About us </Link>
+          <Link to="/dashboard"> Admin Dashboard </Link>
+          <button onClick={NavbarToggle}>  
+            <ReorderIcon />
+          </button>  
+        </div>
     </div>
   );
 }

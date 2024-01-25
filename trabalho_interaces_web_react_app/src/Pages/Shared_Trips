@@ -1,0 +1,9 @@
+import React from 'react';
+
+function Shared_Trips() {
+  return (
+    <div>partilhado</div>
+  );
+}
+
+export default Shared_Trips;
