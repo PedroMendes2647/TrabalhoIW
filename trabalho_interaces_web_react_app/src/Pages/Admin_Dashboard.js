@@ -23,12 +23,6 @@ function Admin_Dashboard() {
     //variável de estado para guardar o id do post a eliminar
     const [PostID_to_update, setPostID_to_update] = useState("");
 
-    // ######### Manipular as admin accounts #####
-    // variável de estado para guardar o novo username
-    const [newUsername, setNewUsername] = useState("");
-    // variável de estado para guardar a nova password
-    const [newPassword, setNewPassword] = useState("");
-    
     // ######### Manipular o login #########
     // variável de estado para guardar o username introduzido no site pelo usuário
     const [username, setUsername] = useState("");
