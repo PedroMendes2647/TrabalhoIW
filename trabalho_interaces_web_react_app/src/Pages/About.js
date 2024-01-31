@@ -10,13 +10,13 @@ function About() {
           <div class="container">
             <div class="half">
               <img src={Miguel} alt="Imagem 1"/>
-              <p>Esta é a primeira frase do lado esquerdo.</p>
-              <p>Esta é a segunda frase do lado esquerdo.</p>
+              <p>Miguel Marcão Brazão.</p>
+              <p>Email:alunoxxxxx@ipt.pt</p>
             </div>
             <div class="half">
               <img src={Pedro} alt="Imagem 2"/>
-              <p>Esta é a primeira frase do lado direito.</p>
-              <p>Esta é a segunda frase do lado direito.</p>
+              <p>Pedro Oliveira Mendes</p>
+              <p>Email:aluno24843@ipt.pt</p>
             </div>
           </div>
         </div>
