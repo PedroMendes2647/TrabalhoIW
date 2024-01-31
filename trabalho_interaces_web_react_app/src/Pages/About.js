@@ -10,8 +10,8 @@ function About() {
           <div class="container">
             <div class="half">
               <img src={Miguel} alt="Imagem 1"/>
-              <p>Miguel Marcão Brazão.</p>
-              <p>Email:alunoxxxxx@ipt.pt</p>
+              <p>Miguel Marcão Brazão</p>
+              <p>Email:aluno25260@ipt.pt</p>
             </div>
             <div class="half">
               <img src={Pedro} alt="Imagem 2"/>

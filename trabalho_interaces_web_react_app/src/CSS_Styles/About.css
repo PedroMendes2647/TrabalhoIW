@@ -1,23 +1,51 @@
-/* About.css */
-
 .container {
-  display: flex; /* Isso alinha os elementos filhos em uma linha */
-  justify-content: center; /* Isso centraliza os elementos filhos horizontalmente */
-  align-items: center; /* Isso centraliza os elementos filhos verticalmente */
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
 }
 
 .half {
-  flex: 1; /* Isso permite que cada elemento filho ocupe um espaço igual */
-  margin: 10px; /* Isso adiciona alguma margem ao redor de cada elemento filho */
-  text-align: center; /* Isso centraliza o texto dentro de cada elemento filho */
+  flex: 1; 
+  margin: 10px; 
+  text-align: center; 
 }
 
 .half img {
-  width: 100%; /* Isso garante que a imagem ocupe toda a largura do contêiner */
-  height: auto; /* Isso mantém a proporção da imagem */
-  max-height: 300px; /* Isso limita a altura da imagem */
-  object-fit: contain; /* Isso faz com que a imagem seja redimensionada para caber, evitando cortes */
-  display: block; /* Isso permite que a imagem seja centralizada */
-  margin: 0 auto; /* Isso centraliza a imagem horizontalmente */
+  width: 100%; 
+  height: auto; 
+  max-height: 300px; 
+  object-fit: contain; 
+  display: block; 
+  margin: 0 auto; 
 }
 
+.container {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 20px; 
+}
+
+.half {
+  flex: 1; 
+  margin: 10px; 
+  text-align: center; 
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
+  border-radius: 5px; 
+  padding: 20px; 
+}
+
+.half img {
+  width: 100%; 
+  height: auto; 
+  max-height: 300px; 
+  object-fit: contain; 
+  display: block; 
+  margin: 0 auto; 
+  border-radius: 5px; 
+}
+
+.half p {
+  color: #333; 
+  font-size: 16px; 
+}

@@ -5,6 +5,7 @@ import "../CSS_Styles/Home.css";
 
 function Home() {
   return (
+    //vídeo de fundo
     <div className="home">
       <video autoPlay loop muted
         style={{

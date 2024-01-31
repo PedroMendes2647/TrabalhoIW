@@ -85,7 +85,7 @@ function Admin_Dashboard() {
             getData();}) 
     };
     
-    //DELTE 
+    //DELETE 
     //remover um post da sheet (que contém todos os posts já existentes)  
     const deletePost = () => {
         fetch(`https://sheetdb.io/api/v1/sx7b7l1ren6nm/Post_ID/${PostID_to_delete}?sheet=posts`, {
@@ -131,6 +131,9 @@ function Admin_Dashboard() {
 
 
 
+    
+
+    //vai buscar a sheet com as admin accounts
     const getAccountsData = () => {
         Axios.get('https://sheetdb.io/api/v1/sx7b7l1ren6nm?sheet=accounts').then(
           (response) => {
@@ -138,7 +141,8 @@ function Admin_Dashboard() {
           }
         );
     };
-        
+    
+    //verificar se as credenciais introduzidas são válidas
     const approveLoginCredentials = () => {
         const user = loginData.find((user) => 
         user.Username_acc === username
@@ -150,17 +154,18 @@ function Admin_Dashboard() {
             setLoginError("");
         } else {
             setAuthenticated(false);
-            setLoginError("O usernanme e a password são inválidos.")
+            setLoginError("O username e a password são inválidos.")
         }
     };
 
-    //vai buscar o conteúdo do excel assim que abrimos a dashboard
+    //vai buscar o conteúdo do excel (posts e contas) assim que abrimos a dashboard
     useEffect(() =>{
         getData();
         getAccountsData();
     },[]);
 
   return (
+    //se estiver autenticado, mostra o conteúdo	da dashboard, caso contrário, continua a mostrar a interface de login, até que credenciais corretas sejam introduzidas
     authenticated ?
     <div className='Admin_Dashboard'>
         <h1>Admin Dashboard</h1>
@@ -178,8 +183,10 @@ function Admin_Dashboard() {
         <textarea  onChange={(e) => setNewPostDescription(e.target.value)} />
         </label>
         <button onClick={addPost}>Adicionar Publicação</button>
-        <h2>Publicações existentes</h2>
-        {sheetData.map((post, index) => (
+
+
+      <h2 className='topDifferent'>Publicações existentes</h2>
+      {sheetData.map((post, index) => (
       <div className="posts_div" key={index}>
         <p className="posts_p">Id da publicação: {post.Post_ID}</p>
         <p className="posts_p">Publicação de {post.Nome}</p>
@@ -187,17 +194,22 @@ function Admin_Dashboard() {
         <p className="posts_p">Descrição: {post.Descricao}</p>
       </div>
         
+
       ))}
+      <h2 className='topDifferent'>Escreva o ID do post a eliminar:</h2>
       <div>
         <label>
-        Escreva o ID do Post a eliminar:
+        ID do Post a eliminar:
         <input type="text" onChange={(e) => setPostID_to_delete(e.target.value)} />
         </label>
         <button onClick={deletePost}>Remover Publicação</button>
       </div>
+
+
+      <h2 className='topDifferent'>Escreva o ID do post a atualizar:</h2>
       <div>
         <label>
-        Escreva o ID do Post a atualizar:
+        ID do Post a atualizar:
         <input type="text" onChange={(e) => setPostID_to_update(e.target.value)} />
         </label>  
         <label>

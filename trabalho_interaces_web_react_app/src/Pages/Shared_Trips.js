@@ -17,6 +17,7 @@ function Shared_Trips() {
   //este useEffect só vai ser executado uma vez, pois
   //está inserido no "final" um array vazio
   
+  //para uso na funcionalidade de pesquisa
   const filteredPosts = posts.filter(post =>
     post.Nome.toLowerCase().includes(search.toLowerCase()) ||
     post.Descricao.toLowerCase().includes(search.toLowerCase())

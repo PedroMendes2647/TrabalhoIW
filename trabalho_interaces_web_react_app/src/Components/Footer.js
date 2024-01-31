@@ -22,7 +22,7 @@ function Footer() {
           </a>
       </div>
       <p> &copy; 2023 World Travelers</p>
-      <Link to="/about"> About us </Link>
+      <Link to="/about_us"> About us </Link>
     </div>
   );
 }
