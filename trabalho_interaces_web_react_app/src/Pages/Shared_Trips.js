@@ -5,22 +5,34 @@ import "../CSS_Styles/Shared_Trips.css";
 function Shared_Trips() {
   //varivel de estato que armazena o conteúdo do excel com os posts
   //useState é um hook e posts é a variável de estado atual, sendo que set_post é a função que a atualiza
-  const [posts, set_post] = useState("");
+  const [posts, set_post] = useState([]);
+  const [search, setSearch] = useState("");
 
-  //transforma o conteúdo do excel num objeto e carrega para o site
-  useEffect(() =>{
-    Axios.get('https://sheetdb.io/api/v1/o58rpvlta1pua').then((response) => {
+  //transforma o conteúdo do excel num objeto e carrega para o site (com recurso a API)
+    useEffect(() =>{
+    Axios.get('https://sheetdb.io/api/v1/sx7b7l1ren6nm?sheet=posts').then((response) => {
       set_post(response.data); //o estado "posts" é atualizado com os dados da resposta da solicitação HTTP
     });
   },[]);
   //este useEffect só vai ser executado uma vez, pois
   //está inserido no "final" um array vazio
   
+  const filteredPosts = posts.filter(post =>
+    post.Nome.toLowerCase().includes(search.toLowerCase()) ||
+    post.Descricao.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    //dar display do conteúdo do excel no ecrã
+    //funcionalidade de pesquisa
     <div className='SharedTrips'>
       <h1 className=''></h1>
-      {posts.length > 0 ? posts.map((post, index) => (
+      <input
+        type="text"
+        placeholder="Pesquisar..."
+        onChange={e => setSearch(e.target.value)}
+      />
+      {filteredPosts.length > 0 ? filteredPosts.map((post, index) => (
+        //dar display do conteúdo do excel no ecrã
         <div key={index}>
           <p>Publicação de {post.Nome}</p>
           <img className='FotoDestino' src={post.Imagem} />

@@ -1,0 +1,53 @@
+.Admin_Dashboard {
+    padding: 20px;
+  }
+  
+  .Admin_Dashboard label {
+    display: block;
+    margin-top: 20px;
+  }
+  
+  .Admin_Dashboard input, .Admin_Dashboard textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .Admin_Dashboard button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .Admin_Dashboard button:hover {
+    background-color: #0056b3;
+  }
+  
+  
+  .posts_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 25px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.1);
+  }
+  
+  .posts_p {
+    text-align: justify;
+    margin: 10px 0;
+  }
+
+  .posts_img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+  }
