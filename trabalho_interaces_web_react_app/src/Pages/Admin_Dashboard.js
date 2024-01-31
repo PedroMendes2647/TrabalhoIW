@@ -14,6 +14,14 @@ function Admin_Dashboard() {
     const [newPostDescription, setNewPostDescription] = useState("");
     //variável de estado para guardar o id do post a eliminar
     const [PostID_to_delete, setPostID_to_delete] = useState("");
+    // variável de estado para guardar o novo nome do autor da publicação (para fins de atualização da sheet)
+    const [updatedName, setUpdatedName] = useState("");
+    // variável de estado para guardar a nova foto da publicação(para fins de atualização da sheet)
+    const [updatedImage, setUpdatedImage] = useState("");
+    // variável de estado para guardar a nova descrição da publicação(para fins de atualização da sheet)
+    const [updatedDescription, setUpdatedDescription] = useState("");
+    //variável de estado para guardar o id do post a eliminar
+    const [PostID_to_update, setPostID_to_update] = useState("");
 
     // ######### Manipular as admin accounts #####
     // variável de estado para guardar o novo username
@@ -27,12 +35,20 @@ function Admin_Dashboard() {
     // variável de estado para guardar a password introduzida no site pelo usuário
     const [password, setPassword] = useState("");
     // variável de estado para guardar o conteúdo da planilha (contas)
-    const [login, setLogin] = useState([]);
+    const [loginData, setLoginData] = useState([]);
     // variável de estado para uso em caso de erros
     const [loginError, setLoginError] = useState("");
     // variável de estado para averiguar se o utilizador do site está autenticado ou não
     const [authenticated, setAuthenticated] = useState(false);
 
+
+
+
+
+    // ###############################################
+    // ##### Operações CRUD (sobre posts) Início #####
+
+    //READ
     //transforma o conteúdo do excel num array de objetos e carrega para o site (com recurso a API)
     const getData = () => {
         Axios.get('https://sheetdb.io/api/v1/sx7b7l1ren6nm?sheet=posts').then(
@@ -42,6 +58,7 @@ function Admin_Dashboard() {
         );
     };
 
+    //CREATE
     //adicionar um novo post à sheet (que contém todos os posts já existentes)  
     const addPost = () => {
         fetch('https://sheetdb.io/api/v1/sx7b7l1ren6nm?sheet=posts', {
@@ -64,10 +81,11 @@ function Admin_Dashboard() {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            //atualizar sheetData
+            //atualiza sheetData
             getData();}) 
     };
     
+    //DELTE 
     //remover um post da sheet (que contém todos os posts já existentes)  
     const deletePost = () => {
         fetch(`https://sheetdb.io/api/v1/sx7b7l1ren6nm/Post_ID/${PostID_to_delete}?sheet=posts`, {
@@ -84,9 +102,10 @@ function Admin_Dashboard() {
             getData();})
     };
 
+    //UPDATE
     //atualizar um post da sheet (que contém todos os posts já existentes)  
     const updatePost = () => {
-        fetch(`https://sheetdb.io/api/v1/sx7b7l1ren6nm/Post_ID/${PostID_to_delete}?sheet=posts`, {
+        fetch(`https://sheetdb.io/api/v1/sx7b7l1ren6nm/Post_ID/${PostID_to_update}?sheet=posts`, {
             method: 'PATCH',
             headers: {
                 'Accept': 'application/json',
@@ -94,7 +113,9 @@ function Admin_Dashboard() {
             },
             body: JSON.stringify({
                 data: {
-                    'name': "Emma"
+                    Nome: updatedName,
+                    Imagem: updatedImage,
+                    Descricao: updatedDescription
                 }
             })
         })
@@ -105,47 +126,108 @@ function Admin_Dashboard() {
             getData();})
     };
 
+    // ##### Operações CRUD (sobre posts) Fim #####
+    // ############################################
+
+
+
+    const getAccountsData = () => {
+        Axios.get('https://sheetdb.io/api/v1/sx7b7l1ren6nm?sheet=accounts').then(
+          (response) => {
+            setLoginData(response.data);
+          }
+        );
+    };
+        
+    const approveLoginCredentials = () => {
+        const user = loginData.find((user) => 
+        user.Username_acc === username
+        &&
+        user.Password === password);
+        if (user) {
+            //Autenticado com sucesso
+            setAuthenticated(true);
+            setLoginError("");
+        } else {
+            setAuthenticated(false);
+            setLoginError("O usernanme e a password são inválidos.")
+        }
+    };
+
     //vai buscar o conteúdo do excel assim que abrimos a dashboard
     useEffect(() =>{
         getData();
+        getAccountsData();
     },[]);
 
   return (
+    authenticated ?
     <div className='Admin_Dashboard'>
-      <h1>Admin Dashboard</h1>
-      
-      <h2>Adicionar nova publicação</h2>
-      <label>
+        <h1>Admin Dashboard</h1>
+        <h2>Adicionar nova publicação</h2>
+        <label>
         Nome:
         <input type="text" onChange={(e) => setNewPostUser(e.target.value)} />
-      </label>
-      <label>
+        </label>
+        <label>
         Imagem:
         <input type="text" onChange={(e) => setNewPostImage(e.target.value)} />
-      </label>
-      <label>
+        </label>
+        <label>
         Descrição:
         <textarea  onChange={(e) => setNewPostDescription(e.target.value)} />
-      </label>
-      <button onClick={addPost}>Adicionar Publicação</button>
-      <h2>Publicações existentes</h2>
-      {sheetData.map((post, index) => (
-        <div className="posts_div" key={index}>
-            <p className="posts_p">Id da publicação: {post.Post_ID}</p>
-            <p className="posts_p">Publicação de {post.Nome}</p>
-            <img className="posts_img" src={post.Imagem} />
-            <p className="posts_p">Descrição: {post.Descricao}</p>
-        </div>
+        </label>
+        <button onClick={addPost}>Adicionar Publicação</button>
+        <h2>Publicações existentes</h2>
+        {sheetData.map((post, index) => (
+      <div className="posts_div" key={index}>
+        <p className="posts_p">Id da publicação: {post.Post_ID}</p>
+        <p className="posts_p">Publicação de {post.Nome}</p>
+        <img className="posts_img" src={post.Imagem} />
+        <p className="posts_p">Descrição: {post.Descricao}</p>
+      </div>
         
       ))}
       <div>
-      <label>
+        <label>
         Escreva o ID do Post a eliminar:
         <input type="text" onChange={(e) => setPostID_to_delete(e.target.value)} />
-      </label>
-      <button onClick={deletePost}>Remover Publicação</button>
-
+        </label>
+        <button onClick={deletePost}>Remover Publicação</button>
       </div>
+      <div>
+        <label>
+        Escreva o ID do Post a atualizar:
+        <input type="text" onChange={(e) => setPostID_to_update(e.target.value)} />
+        </label>  
+        <label>
+        Nome Atualizado:
+        <input type="text" onChange={(e) => setUpdatedName(e.target.value)} />
+        </label>
+        <label>
+        Imagem Atualizada:
+        <input type="text" onChange={(e) => setUpdatedImage(e.target.value)} />
+        </label>
+        <label>
+        Descrição Atualizada:
+        <input type="text" onChange={(e) => setUpdatedDescription(e.target.value)} />
+        </label>
+        <button onClick={updatePost}>Atualizar Publicação</button>
+      </div>
+    </div>
+    :
+    <div className='Login'>
+        <h1>Login</h1>
+        <label>
+        Username:
+        <input type="text" onChange={(e) => setUsername(e.target.value)} />
+        </label>
+        <label>
+        Password:
+        <input type="password" onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <button onClick={approveLoginCredentials}>Login</button>
+        {loginError && <p>{loginError}</p>}
     </div>
 );
 

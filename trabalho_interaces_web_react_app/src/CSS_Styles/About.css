@@ -1,15 +1,23 @@
-.about container {
-    width: 100%;
-    display: flex;
-  }
-  
-  .about half {
-    flex: 1;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-  
-  .about img {
-    max-width: 100%;
-    height: auto;
-  }
+/* About.css */
+
+.container {
+  display: flex; /* Isso alinha os elementos filhos em uma linha */
+  justify-content: center; /* Isso centraliza os elementos filhos horizontalmente */
+  align-items: center; /* Isso centraliza os elementos filhos verticalmente */
+}
+
+.half {
+  flex: 1; /* Isso permite que cada elemento filho ocupe um espaço igual */
+  margin: 10px; /* Isso adiciona alguma margem ao redor de cada elemento filho */
+  text-align: center; /* Isso centraliza o texto dentro de cada elemento filho */
+}
+
+.half img {
+  width: 100%; /* Isso garante que a imagem ocupe toda a largura do contêiner */
+  height: auto; /* Isso mantém a proporção da imagem */
+  max-height: 300px; /* Isso limita a altura da imagem */
+  object-fit: contain; /* Isso faz com que a imagem seja redimensionada para caber, evitando cortes */
+  display: block; /* Isso permite que a imagem seja centralizada */
+  margin: 0 auto; /* Isso centraliza a imagem horizontalmente */
+}
+
