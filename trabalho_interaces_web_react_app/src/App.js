@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import Shared_Trips from "./Pages/Shared_Trips";
 import Footer from "./Components/Footer";
 import Admin_Dashboard from "./Pages/Admin_Dashboard";
+import About from "./Pages/About";
 //import Share_Your_Trips from "./Pages/Share_Your_Trips";
 //<Route path="/share_your_trip" exact component={Share_Your_Trips} />
 //<Route path="/about" exact component={About} />
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/shared_trips" exact component={Shared_Trips} />
           <Route path="/admin_dashboard" exact component={Admin_Dashboard} />
+          <Route path="/about_us" exact component={About} />
         </Switch>
         <Footer/>  
       </Router>  

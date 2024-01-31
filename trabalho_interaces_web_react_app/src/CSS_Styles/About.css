@@ -1,0 +1,15 @@
+.about container {
+    width: 100%;
+    display: flex;
+  }
+  
+  .about half {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .about img {
+    max-width: 100%;
+    height: auto;
+  }
